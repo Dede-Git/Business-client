@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import { Button, Form } from 'react-bootstrap';
 import { useAuth } from '../../utils/context/authContext';
 import { createBusiness, updateBusiness } from '../../utils/data/businessData';
-import { getBusinessType } from '../../utils/data/businesstypeData';
+import getBusinessType from '../../utils/data/businesstypeData';
 
 const initialState = {
   user: 0,
