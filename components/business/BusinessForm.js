@@ -52,7 +52,7 @@ const BusinessForm = ({ businessObj }) => {
     if (businessObj.id) {
       const updatedBusiness = {
         id: currentBusiness.id,
-        user: user.id,
+        user: user.uid,
         business_type: Number(currentBusiness.business_type),
         name: currentBusiness.name,
         pitch: currentBusiness.pitch,
@@ -63,7 +63,7 @@ const BusinessForm = ({ businessObj }) => {
         .then(() => router.push('/businesses'));
     } else {
       const business = {
-        user: user.id,
+        user: user.uid,
         business_type: Number(currentBusiness.business_type),
         name: currentBusiness.name,
         pitch: currentBusiness.pitch,
@@ -140,6 +140,7 @@ BusinessForm.propTypes = {
     pitch: PropTypes.string,
     area: PropTypes.string,
     cost: PropTypes.string,
+    uid: PropTypes.string,
   }),
 };
 
