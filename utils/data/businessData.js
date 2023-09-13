@@ -57,6 +57,32 @@ const updateBusiness = (payload) => new Promise((resolve, reject) => {
     .catch(reject);
 });
 
+const favBusiness = (businessId, uid) => new Promise((resolve, reject) => {
+  fetch(`${clientCredentials.databaseURL}/businesses/${businessId}/favorite`, {
+    method: 'POST',
+    body: JSON.stringify(),
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `${uid}`,
+    },
+  })
+    .then((response) => response.json())
+    .then(resolve)
+    .catch(reject);
+});
+const unfavBusiness = (businessId, uid) => new Promise((resolve, reject) => {
+  fetch(`${clientCredentials.databaseURL}/businesses/${businessId}/unfavorite`, {
+    method: 'DELETE',
+    body: JSON.stringify(),
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `${uid}`,
+    },
+  })
+    .then(resolve)
+    .catch(reject);
+});
+
 export {
-  getBusinesses, createBusiness, getSingleBusiness, updateBusiness, deleteSingleBusiness,
+  getBusinesses, createBusiness, getSingleBusiness, updateBusiness, deleteSingleBusiness, favBusiness, unfavBusiness,
 };
