@@ -3,10 +3,16 @@ import PropTypes from 'prop-types';
 import { Card, Button } from 'react-bootstrap';
 import Link from 'next/link';
 import { useAuth } from '../../utils/context/authContext';
-import { deleteSingleBusiness } from '../../utils/data/businessData';
+import { deleteSingleBusiness, favBusiness, unfavBusiness } from '../../utils/data/businessData';
 
 function BusinessCard({ businessObj, onUpdate }) {
   const user = useAuth();
+  const favorite = () => {
+    favBusiness(businessObj.id, user.uid).then(() => onUpdate());
+  };
+  const unfavorite = () => {
+    unfavBusiness(businessObj.id, user.uid).then(() => onUpdate());
+  };
 
   const deleteBusiness = () => {
     if (window.confirm(`Delete ${businessObj.name} business?`)) {
@@ -35,6 +41,9 @@ function BusinessCard({ businessObj, onUpdate }) {
           </Link>
         </div>
         <div>
+          {businessObj.favorited ? <Button onClick={unfavorite}>unfavorite</Button> : <Button onClick={favorite}>favorite</Button>}
+        </div>
+        <div>
           {businessObj.user.uid === user.user.uid ? (<Button type="button" className="m-2" onClick={deleteBusiness}>Delete Business</Button>) : ''}
         </div>
       </div>
@@ -60,6 +69,7 @@ BusinessCard.propTypes = {
     pitch: PropTypes.string,
     area: PropTypes.string,
     cost: PropTypes.string,
+    favorited: PropTypes.bool,
   }).isRequired,
   onUpdate: PropTypes.func.isRequired,
 };
