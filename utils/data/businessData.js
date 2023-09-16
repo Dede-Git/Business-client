@@ -102,3 +102,5 @@ const getFavoritedBusinesses = (id, uid) => fetch(`${clientCredentials.databaseU
 export {
   getBusinesses, createBusiness, getSingleBusiness, updateBusiness, deleteSingleBusiness, favBusiness, unfavBusiness, getFavoritedBusinesses,
 };
+
+//
