@@ -4,11 +4,11 @@ import UserCard from '../components/user/UserCard';
 import { getSingleUser } from '../utils/data/userData';
 
 export default function Profile() {
-  const [customer, setCustomer] = useState({});
+  const [profile, setProfile] = useState({});
   const { user } = useAuth();
 
   useEffect(() => {
-    getSingleUser(user.id).then(setCustomer);
+    getSingleUser(user.id).then(setProfile);
   }, [user]);
-  return <UserCard userObj={customer} />;
+  return <UserCard userObj={profile} />;
 }

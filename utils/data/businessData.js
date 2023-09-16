@@ -1,7 +1,13 @@
 import { clientCredentials } from '../client';
 
-const getBusinesses = () => new Promise((resolve, reject) => {
-  fetch(`${clientCredentials.databaseURL}/businesses`)
+const getBusinesses = (uid) => new Promise((resolve, reject) => {
+  fetch(`${clientCredentials.databaseURL}/businesses`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `${uid}`,
+    },
+  })
     .then((response) => response.json())
     .then(resolve)
     .catch(reject);
@@ -22,11 +28,12 @@ const createBusiness = (payload) => new Promise((resolve, reject) => {
     .catch(reject);
 });
 
-const getSingleBusiness = (id) => new Promise((resolve, reject) => {
+const getSingleBusiness = (id, uid) => new Promise((resolve, reject) => {
   fetch(`${clientCredentials.databaseURL}/businesses/${id}`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
+      Authorization: `${uid}`,
     }, // you technically do not need the options object for GET requests, but using it here for consistency
   })
     .then((response) => response.json())
@@ -45,11 +52,12 @@ const deleteSingleBusiness = (id) => new Promise((resolve, reject) => {
     .catch(reject);
 });
 
-const updateBusiness = (payload) => new Promise((resolve, reject) => {
+const updateBusiness = (payload, uid) => new Promise((resolve, reject) => {
   fetch(`${clientCredentials.databaseURL}/businesses/${payload.id}`, {
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json',
+      Authorization: `${uid}`,
     },
     body: JSON.stringify(payload),
   })

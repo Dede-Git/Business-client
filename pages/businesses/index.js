@@ -3,12 +3,14 @@ import React, { useEffect, useState } from 'react';
 import { Button } from 'react-bootstrap';
 import BusinessCard from '../../components/business/BusinessCard';
 import { getBusinesses } from '../../utils/data/businessData';
+import { useAuth } from '../../utils/context/authContext';
 
 function Home() {
   const router = useRouter();
-  const [businesss, setBusinesses] = useState([]);
+  const { user } = useAuth();
+  const [businesses, setBusinesses] = useState([]);
   const getAllBusinesses = () => {
-    getBusinesses().then((data) => setBusinesses(data));
+    getBusinesses(user.uid).then((data) => setBusinesses(data));
   };
 
   useEffect(() => {
@@ -28,7 +30,7 @@ function Home() {
       </div>
       <article className="businesses">
         <h3>Businesses</h3>
-        {businesss.map((business) => (
+        {businesses.map((business) => (
           <section key={`business--${business.id}`} className="businesses">
             <BusinessCard businessObj={business} onUpdate={getAllBusinesses} />
           </section>

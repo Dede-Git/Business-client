@@ -6,7 +6,7 @@ import { useAuth } from '../../utils/context/authContext';
 import { deleteSingleBusiness, favBusiness, unfavBusiness } from '../../utils/data/businessData';
 
 function BusinessCard({ businessObj, onUpdate }) {
-  const user = useAuth();
+  const { user } = useAuth();
   const favorite = () => {
     favBusiness(businessObj.id, user.uid).then(() => onUpdate());
   };
@@ -37,14 +37,14 @@ function BusinessCard({ businessObj, onUpdate }) {
         </div>
         <div>
           <Link href={`/businesses/edit/${businessObj.id}`} passHref>
-            {businessObj.user.uid === user.user.uid ? (<Button type="button" className="m-2">Edit Business</Button>) : ''}
+            {businessObj.user.uid === user.uid ? (<Button type="button" className="m-2">Edit Business</Button>) : ''}
           </Link>
         </div>
         <div>
           {businessObj.favorited ? <Button onClick={unfavorite}>unfavorite</Button> : <Button onClick={favorite}>favorite</Button>}
         </div>
         <div>
-          {businessObj.user.uid === user.user.uid ? (<Button type="button" className="m-2" onClick={deleteBusiness}>Delete Business</Button>) : ''}
+          {businessObj.user.uid === user.uid ? (<Button type="button" className="m-2" onClick={deleteBusiness}>Delete Business</Button>) : ''}
         </div>
       </div>
     </Card>
@@ -75,5 +75,3 @@ BusinessCard.propTypes = {
 };
 
 export default BusinessCard;
-
-// hh
