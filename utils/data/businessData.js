@@ -91,6 +91,16 @@ const unfavBusiness = (businessId, uid) => new Promise((resolve, reject) => {
     .catch(reject);
 });
 
+const getFavoritedBusinesses = (id, uid) => fetch(`${clientCredentials.databaseURL}/favbusinesses?user=${id}`, {
+  method: 'GET',
+  headers: {
+    'Content-Type': 'application/json',
+    Authorization: `${uid}`,
+  },
+}).then((response) => response.json());
+
 export {
-  getBusinesses, createBusiness, getSingleBusiness, updateBusiness, deleteSingleBusiness, favBusiness, unfavBusiness,
+  getBusinesses, createBusiness, getSingleBusiness, updateBusiness, deleteSingleBusiness, favBusiness, unfavBusiness, getFavoritedBusinesses,
 };
+
+//
