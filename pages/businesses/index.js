@@ -15,6 +15,7 @@ function Home() {
 
   useEffect(() => {
     getAllBusinesses();
+    console.warn(businesses);
   }, []);
 
   return (
